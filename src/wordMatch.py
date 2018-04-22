@@ -1,4 +1,8 @@
+ENGLISH_FREQ = "Dictionaries/EnglishFreq.txt"
 ENGLISH = "Dictionaries/English.txt"
+
+linesFreq = list(open(ENGLISH_FREQ))
+wordsFreq = [word.strip() for word in linesFreq]
 
 lines = list(open(ENGLISH))
 words = [word.strip() for word in lines]
@@ -23,18 +27,32 @@ def isEmbeddable(str1, str2):
 
 # Returns the longest element in a list, according to the len function.
 def longest(lst):
+	if len(lst) == 0:
+		return None
 	return max(lst, key=len)
 
-def findMatch(trace):
+def findMatch(trace, srcWords):
 	possibleResults = []
-	for word in words:
-		if word[0] == trace[0] and word[-1] == trace[-1]:
-			if isEmbeddable(word, trace):
-				possibleResults.append(word)
+	for word in srcWords:
+		if len(word) > 2 and ("a" in word or "e" in word or "i" in word or "o" in word or "u" in word or "y" in word):	# 1-2 letter words and vowelless words should not be swiped
+			if word[0] == trace[0] and word[-1] == trace[-1]:
+				if isEmbeddable(word, trace):
+					possibleResults.append(word)
 	possibleResults.sort(key=len, reverse=True)
-	return possibleResults
-	return str(longest(possibleResults)) + " " + str(len(possibleResults))
+	#return possibleResults
+	return str(longest(possibleResults))# + " " + str(len(possibleResults))
 
 print(len(words))
+
 while True:
-	print(findMatch(input()))
+	trace = input()
+	match = findMatch(trace, wordsFreq)
+	if match is None:
+		print("not frequent!")
+		print(findMatch(trace, words))
+	else:
+		match2 = findMatch(trace, words)
+		if len(match2) - len(match) >= 2:
+			print(match2)
+		else:
+			print(match)
