@@ -1,9 +1,11 @@
 import keyboard
 import time
+from wordMatch import match
 
-TIME_THRESHOLD = 1
+TIME_THRESHOLD = 0.3
 lastTimeUp = -1
-words = []
+traces = []
+wordsOut = []
 word = "-1"
 def cleanKeyName(keyEventStr):
     newStr = keyEventStr[13:]
@@ -16,31 +18,33 @@ def logKey(keyEvent):
     global word
     keyTime = keyEvent.time
     keyName = cleanKeyName(str(keyEvent))
-    print(str(keyTime) + " " + str(keyName))
+    # print(str(keyTime) + " " + str(keyName))
     direction = keyName.split(" ")[1]
     if direction == "up":
-        print("UPPPP")
-        lastTimeUp = keyTime
+        # print("UPPPP")
         word += keyName.split(" ")[0]
+    lastTimeUp = keyTime
 
 recorded = keyboard.hook(logKey)
 
 a = time.time()
 b = time.time()
 
-while (b - a) < 10:
-    global words
-    global word
+while (b - a) < 20:
     b = time.time()
-    print(time.time() - lastTimeUp)
+    # print(time.time() - lastTimeUp)
     if lastTimeUp == -1:
-        print("the first")
+        pass
     elif (time.time() - lastTimeUp) >= TIME_THRESHOLD:
-        print("ALLLIVE")
+        # print("ALLLIVE")
         if word != "":
-            words.append(word)
+            if word[0] == '-':
+                word = word[2:]
+            traces.append(word)
+            wordsOut.append(match(word))
             word = ""
 
 
 print(word)
-print(words)
+print(traces)
+print(wordsOut)
