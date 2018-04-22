@@ -42,17 +42,14 @@ def findMatch(trace, srcWords):
 	#return possibleResults
 	return str(longest(possibleResults))# + " " + str(len(possibleResults))
 
-print(len(words))
-
-while True:
-	trace = input()
+def match(trace):
 	match = findMatch(trace, wordsFreq)
 	if match is None:
-		print("not frequent!")
-		print(findMatch(trace, words))
+		return findMatch(trace, words)
 	else:
 		match2 = findMatch(trace, words)
 		if len(match2) - len(match) >= 2:
-			print(match2)
+			return match2
 		else:
-			print(match)
+			return match
+
