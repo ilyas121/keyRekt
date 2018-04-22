@@ -20,6 +20,10 @@ def logKey(keyEvent):
     keyTime = keyEvent.time
     keyName = cleanKeyName(str(keyEvent))
     direction = keyName.split(" ")[1]
+    if keyName.split(" ")[0] == "space":
+        traces.append(word)
+        print(word)
+        word = ""
     if direction == "up":
         word += keyName.split(" ")[0]
     lastTimeUp = keyTime

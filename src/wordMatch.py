@@ -43,6 +43,8 @@ def findMatch(trace, srcWords):
 	return str(longest(possibleResults))# + " " + str(len(possibleResults))
 
 def match(trace):
+	if len(trace) == 0:
+		return trace
 	match = findMatch(trace, wordsFreq)
 	if match == 'None':
 		return findMatch(trace, words)
