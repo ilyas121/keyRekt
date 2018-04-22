@@ -44,7 +44,7 @@ def findMatch(trace, srcWords):
 
 def match(trace):
 	match = findMatch(trace, wordsFreq)
-	if match is None:
+	if match == 'None':
 		return findMatch(trace, words)
 	else:
 		match2 = findMatch(trace, words)
