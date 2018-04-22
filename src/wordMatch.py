@@ -52,4 +52,3 @@ def match(trace):
 			return match2
 		else:
 			return match
-
