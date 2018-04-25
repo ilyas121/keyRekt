@@ -33,7 +33,7 @@ recorded = keyboard.hook(logKey)
 a = time.time()
 b = time.time()
 
-while b - a < 60:
+while b - a < 300:
     b = time.time()
     if lastTimeUp == -1:
         pass
@@ -45,6 +45,6 @@ while b - a < 60:
             toPrint = match(word)
             if toPrint == 'None':
             	print(word)
-            else:
+            elif word != 'space':
             	print(toPrint)
             word = ""
