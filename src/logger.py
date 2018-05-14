@@ -4,7 +4,7 @@ import os
 from wordMatch import match
 
 TIME_THRESHOLD = 0.3
-lastTimeUp = -1
+lastTimeUp  = -1
 traces = []
 wordsOut = []
 word = ""
